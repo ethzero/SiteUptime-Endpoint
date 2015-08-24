@@ -141,7 +141,7 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
 google.setOnLoadCallback(drawChart);
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
-['Time', 'page latency (ms)', 'load average '],
+['Time', 'page latency (ms)'<?php if (!stristr(PHP_OS, 'win')) { ?>, 'load average '<?php } ?>],
     <?php
     $result = mysqli_query($con,"SELECT *, UNIX_TIMESTAMP(`timestamp`) as ts FROM `siteuptime` WHERE `timestamp` > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY timestamp LIMIT 0,200;");
     while ($row = mysqli_fetch_assoc($result)) {
@@ -157,13 +157,13 @@ function drawChart() {
         hAxis: {title: 'Time',  titleTextStyle: {color: '#333'}, showTextEvery: 5},
         vAxis: {
             0: {minValue: 0},
-            1: {minValue: 0},
+            <?php if (!stristr(PHP_OS, 'win')) { ?>1: {minValue: 0},<?php } ?>
         },
         series: {
             0: {targetAxisIndex:0},
-            1: {targetAxisIndex:1},
+            <?php if (!stristr(PHP_OS, 'win')) { ?>1: {targetAxisIndex:1},<?php } ?>
         },
-        colors: ["rgb(32, 76, 116)", "rgb(245, 116, 49)"],
+        colors: ["rgb(32, 76, 116)"<?php if (!stristr(PHP_OS, 'win')) { ?>, "rgb(245, 116, 49)"<?php } ?>],
     };
     var chart = new google.visualization.AreaChart(document.getElementById('page_latency_chart'));
     chart.draw(data, options);
