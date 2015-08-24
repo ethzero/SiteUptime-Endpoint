@@ -1,6 +1,11 @@
 <?php
 $time = -microtime(true);
-$loadavg = sys_getloadavg();
+
+if (stristr(PHP_OS, 'win')) {
+    $loadavg = array(0,0,0);
+} else {
+    $loadavg = sys_getloadavg();
+}
 
 if ( file_exists(basename(__FILE__, '.php').'.conf.php') )
     require_once basename(__FILE__, '.php').'.conf.php';
