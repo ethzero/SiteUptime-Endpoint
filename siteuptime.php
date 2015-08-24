@@ -109,7 +109,7 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
             <td class="id"><?php echo $row['id']?></td>
             <td class="timestamp"><?php echo $row['timestamp']?></td>
             <td class="page-latency"><?php echo sprintf("%.3f", $row['page_latency'] * 1000); ?></td>
-<?php if (stristr(PHP_OS, 'win')) { ?>
+<?php if (!stristr(PHP_OS, 'win')) { ?>
             <td class="loadavg"><?php echo sprintf("%.2f, %.2f, %.2f", $uns_loadavg[0], $uns_loadavg[1], $uns_loadavg[2]);?></td>
 <?php } ?>
             <td class="ip_address"><?php echo $row['meta']?></td>
@@ -147,7 +147,7 @@ function drawChart() {
     while ($row = mysqli_fetch_assoc($result)) {
         $uns_loadavg = unserialize($row['loadavg']);
         if (stristr(PHP_OS, 'win')) { ?>
-    ['<?php echo $row['timestamp'] ?>', <?php echo $row['page_latency'] * 1000?>,
+    ['<?php echo $row['timestamp'] ?>', <?php echo $row['page_latency'] * 1000?>],
         <?php } else { ?>
     ['<?php echo $row['timestamp'] ?>', <?php echo $row['page_latency'] * 1000?>, <?php echo $uns_loadavg[2]?>],
         <?php }} ?>
