@@ -1,0 +1,198 @@
+html {
+    font-size: 100%;   
+    background-color: rgb(194, 205, 215);
+}
+body {
+    font-family: Trebuchet MS;
+    font-size: small;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(247, 247, 247);
+    background-color: white;
+}
+header {
+    display: block;
+    padding: 1em 0 1em 0;
+    border-bottom: 1px solid hsl(0, 0%, 92%);
+    background-color: hsl(0, 0%, 99%);
+    margin-bottom: 2em;
+}
+section {
+}
+
+/* http://nicolasgallagher.com/micro-clearfix-hack/ */
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+.cf:after {
+    clear: both;
+}
+.cf {
+    *zoom: 1;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: rgb(32, 76, 116);    
+}
+a:hover {
+    /*text-decoration: underline !important;*/
+}
+a:active {
+    color: rgb(245, 116, 49);    
+}
+
+
+h1 {
+    color: rgb(150, 150, 150);
+    text-align: center;
+    font-size: xx-large;
+    text-shadow: 1px 1px 2px rgb(128, 128, 128);
+    margin: 0;
+}
+#Site { color: rgb(245, 116, 49); }
+#Uptime { color: rgb(32, 76, 116); }
+
+#data-table-container {
+    text-align: center;
+    margin: 0 auto; */;
+}
+
+#data-table {
+    height: 200px;
+    overflow: scroll;
+    margin-bottom: 2em;
+    cursor: ns-resize;
+    display: inline-block;
+    text-align: center;
+    border: 1px solid hsl(0, 0%, 92%);
+    background-color: hsl(0, 0%, 99%);
+}
+
+table {
+    border-spacing: 0px 1px;
+    cursor: default;
+    width: 600px;
+    table-layout: fixed;
+}
+caption {
+    padding: 0.5em 0 0em 0;
+    color: rgb(86, 86, 86);
+}
+
+/*table, th, td {*/
+tr {
+   border-collapse: collapse;
+   border-spacing: 0px;
+}
+thead {
+}
+
+thead tr {
+    background-color: lightsteelblue;
+    background-color: hsl(0, 0%, 99%);
+    vertical-align: top;
+}
+thead tr th {
+    padding: 0.5em;
+}
+
+tbody {
+    height: 50%;
+    overflow: scroll;
+}
+tbody tr:nth-child(odd) {
+    background-color: hsl(21, 75%, 96%);
+}
+tbody tr:nth-child(even) {
+    background-color: hsl(209, 21%, 95%);
+}
+tbody tr:hover {
+    cursor: default;
+    background-color: rgb(247, 215, 198);
+    background-color: hsl(20, 91%, 87%);
+    border: 1px solid rgb(0,0,0);
+    background-color: hsl(209, 23%, 79%);
+    background-color: hsl(40, 74%, 87%);
+}
+tbody tr td {
+    color: hsl(0, 0%, 69%);
+}
+tbody tr:hover td {
+    color: black;
+}
+tbody tr:hover:nth-child(odd) td {
+}
+tbody tr:hover:nth-child(even) td {
+}
+
+td {
+    padding: 0.2em 0.5em;
+    white-space: nowrap;
+}
+td.id { text-align: center; }
+td.timestamp { text-align: center; }
+td.page-latency { text-align: right; }
+td.loadavg { text-align: left; }
+td.ip-address { text-align: center; }
+
+#page_latency_chart {
+    border: 1px solid hsl(0, 0%, 92%);
+    width: 600px;
+    margin: 0 auto;
+    margin-bottom: 1em;
+}
+
+footer {
+    padding: 2.5em 0;
+    width: 100%;
+    background-color: rgb(194, 205, 215);
+    box-shadow: inset 0px 5px 10px -5px rgb(128, 128, 128);
+    vertical-align: top;
+    text-align: center;
+    color: hsl(0, 0%, 59%);
+}
+footer a:link, a:visited {
+    color: hsl(21, 41%, 59%);
+}
+footer a:active {
+    color: rgb(245, 116, 49);    
+}
+footer a:hover {
+    color: hsl(21, 51%, 69%);
+}
+.panel {
+    vertical-align: top;
+    /* width: 200px; */
+    margin: 0 auto;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 1.5em;
+}
+#siteuptime {
+    width: 150px;
+}
+#siteuptime a {
+    display: block;
+    margin-bottom: 0.5em;
+}
+#cc {
+    font-size: smaller;
+    width: 300px;
+}
+#legal {
+    font-size: xx-small;
+    text-align: center;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+#github {
+    width: 150px;
+    
+}
+#github>* {
+    margin-bottom: 0.5em;
+}
+
