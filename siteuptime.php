@@ -82,7 +82,6 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
 <header>
     <h1><span id="Site">Site</span><span id="Uptime">Uptime</span> Endpoint</h1>
     <a href="https://github.com/ethzero"><img style="position: fixed; top: 0; right: 0; border: 0; z-index: 1" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
-
 </header>
 
 <section>
@@ -97,7 +96,9 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
                 <th class="id">#id</th>
                 <th class="timestamp">Timestamp</th>
                 <th class="page-latency">Page Latency<br>(ms)</th>
+<?php if (!stristr(PHP_OS, 'win')) { ?>
                 <th class="loadavg">Load Average<br>(1, 5, 15mins)</th>
+<?php } ?>
                 <th class="ip-address">IP Address</th>
             </tr>
         </thead>
@@ -108,7 +109,9 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
             <td class="id"><?php echo $row['id']?></td>
             <td class="timestamp"><?php echo $row['timestamp']?></td>
             <td class="page-latency"><?php echo sprintf("%.3f", $row['page_latency'] * 1000); ?></td>
+<?php if (stristr(PHP_OS, 'win')) { ?>
             <td class="loadavg"><?php echo sprintf("%.2f, %.2f, %.2f", $uns_loadavg[0], $uns_loadavg[1], $uns_loadavg[2]);?></td>
+<?php } ?>
             <td class="ip_address"><?php echo $row['meta']?></td>
         </tr>
         <?php } ?>
@@ -128,7 +131,7 @@ $result = mysqli_query($con,"SELECT * FROM `siteuptime` WHERE `timestamp` > DATE
     </div>
     <div class="panel" id="github">
         <a class="github-button" href="https://github.com/ethzero" data-style="mega" aria-label="Follow @ethzero on GitHub">Follow @ethzero</a>
-        <a class="github-button" href="https://github.com/ethzero/SiteUptimeEndpoint/archive/master.zip" data-style="mega" aria-label="Download ethzero/SiteUptimeEndpoint on GitHub">Download</a>
+        <a class="github-button" href="https://github.com/ethzero/SiteUptime-Endpoint/archive/master.zip" data-style="mega" aria-label="Download ethzero/SiteUptime-Endpoint on GitHub">Download</a>
     </div>
     <p id="legal">The SiteUptime Endpoint script is not affiliated with or endorsed by SiteUptime. "SiteUptime" is a registered trademark of SiteUptime LLC.</p>
 </footer>
@@ -142,9 +145,12 @@ function drawChart() {
     <?php
     $result = mysqli_query($con,"SELECT *, UNIX_TIMESTAMP(`timestamp`) as ts FROM `siteuptime` WHERE `timestamp` > DATE_SUB(NOW(), INTERVAL 1 DAY) ORDER BY timestamp LIMIT 0,200;");
     while ($row = mysqli_fetch_assoc($result)) {
-        $uns_loadavg = unserialize($row['loadavg']);?>
+        $uns_loadavg = unserialize($row['loadavg']);
+        if (stristr(PHP_OS, 'win')) { ?>
+    ['<?php echo $row['timestamp'] ?>', <?php echo $row['page_latency'] * 1000?>,
+        <?php } else { ?>
     ['<?php echo $row['timestamp'] ?>', <?php echo $row['page_latency'] * 1000?>, <?php echo $uns_loadavg[2]?>],
-    <?php } ?>
+        <?php }} ?>
     ]);
     var options = {
         title: 'siteuptime.php page render latency for the last 24 hours',
@@ -155,7 +161,7 @@ function drawChart() {
         },
         series: {
             0: {targetAxisIndex:0},
-            1:{targetAxisIndex:1},
+            1: {targetAxisIndex:1},
         },
         colors: ["rgb(32, 76, 116)", "rgb(245, 116, 49)"],
     };
