@@ -1,11 +1,11 @@
 <?php
 $cfg['mysql']['host'] =         'localhost';
-$cfg['mysql']['database'] =     '';
+$cfg['mysql']['database'] =     'siteuptime-endpoint';
 $cfg['mysql']['table'] =        'siteuptime';
 $cfg['mysql']['user'] =         'siteuptime';
-$cfg['mysql']['pw'] =           '';
-$cfg['siteuptime']['UserId'] =  '';
-$cfg['siteuptime']['Id'] =      '';
+$cfg['mysql']['pw'] =           'password';
+$cfg['siteuptime']['UserId'] =  'xxxxxxxx';
+$cfg['siteuptime']['Id'] =      'xxxx';
 $cfg['request_key'] =           '';
 
 /*
